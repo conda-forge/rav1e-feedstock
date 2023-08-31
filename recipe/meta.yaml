@@ -9,7 +9,7 @@ source:
   sha256: 723696e93acbe03666213fbc559044f3cae5b8b888b2ddae667402403cff51e5
 
 build:
-  number: 0
+  number: 1
   run_exports:
     # It seems that they export a so with .0, so I'm going to wish for the best
     - {{ pin_subpackage('rav1e', max_pin='x') }}
@@ -32,6 +32,7 @@ test:
     - rav1e --help
     - test -f ${PREFIX}/lib/librav1e${SHLIB_EXT}             # [unix]
     - if not exist %LIBRARY_PREFIX%\\bin\\rav1e.dll exit 1   # [win]
+    - if not exist %LIBRARY_PREFIX%\\lib\\rav1e.lib exit 1   # [win]
 
 about:
   home: https://github.com/xiph/rav1e
