@@ -1,5 +1,7 @@
 set -ex
 
+export PKG_CONFIG=${BUILD_PREFIX}/bin/pkg-config
+
 cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
 
 cargo build --release
