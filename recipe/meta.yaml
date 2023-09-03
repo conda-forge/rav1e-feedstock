@@ -13,9 +13,6 @@ build:
   run_exports:
     # It seems that they export a so with .0, so I'm going to wish for the best
     - {{ pin_subpackage('rav1e', max_pin='x') }}
-  ignore_run_exports:
-    # Need to include it for cargo-c to be installed
-    - openssl
   has_prefix_files:
     - Library/lib/pkgconfig/rav1e.pc  # [win]
 
@@ -23,11 +20,9 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('rust') }}
-    - nasm
     - cargo-bundle-licenses
-    - pkg-config                         # [unix]
-  host:
-    - openssl
+    - cargo-c
+    - nasm
 
 test:
   requires:
