@@ -32,7 +32,7 @@ test:
   files:
     - CMakeLists.txt
   commands:
-    - rav1e --version
+    - rav1e --version  # [build_platform == target_platform]
     - test -f ${PREFIX}/lib/librav1e${SHLIB_EXT}                # [unix]
     - if not exist %LIBRARY_PREFIX%\\bin\\rav1e.dll exit 1      # [win]
     - if not exist %LIBRARY_PREFIX%\\lib\\rav1e.dll.lib exit 1  # [win]
