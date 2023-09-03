@@ -23,6 +23,7 @@ requirements:
     - cargo-bundle-licenses
     - cargo-c
     - nasm
+    - pkg-config                         # [unix]
 
 test:
   requires:
