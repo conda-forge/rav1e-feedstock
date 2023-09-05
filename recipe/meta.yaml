@@ -21,7 +21,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('rust') }}
     - cargo-bundle-licenses
-    - cargo-c
+    - cargo-c                            # [not ppc64le]
     - nasm
     - pkg-config                         # [unix]
 
