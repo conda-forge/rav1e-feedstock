@@ -1,6 +1,6 @@
 set -ex
 
-if [[ "${HOST}" == "ppc64le*" ]]; then
+if [[ "${HOST}" == "powerpc64le*" ]]; then
     # https://github.com/xiph/rav1e
     # Trying to get cargo-c to get compiled for ppc64le
     # https://github.com/conda-forge/cargo-c-feedstock/pull/1
