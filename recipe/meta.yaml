@@ -21,9 +21,13 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('rust') }}
     - cargo-bundle-licenses
-    - cargo-c
+    - cargo-c                            # [not ppc64le]
     - nasm
     - pkg-config                         # [unix]
+  host:
+    # hmaarrfk -- this seems required to build cargo-c
+    # which we do not have yet for ppc64le
+    - openssl  # [ppc64le]
 
 test:
   requires:
