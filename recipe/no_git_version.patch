@@ -1,0 +1,14 @@
+diff --git a/Cargo.toml b/Cargo.toml
+index b871fb28..0ec6a8db 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -38,8 +38,7 @@ binaries = [
+   "av-metrics",
+   "nom",
+ ]
+-default = ["binaries", "asm", "threading", "signal_support", "git_version"]
+-git_version = ["built/git2"]
++default = ["binaries", "asm", "threading", "signal_support"]
+ asm = ["nasm-rs", "cc"]
+ threading = ["rayon/threads"]
+ signal_support = ["signal-hook"]
