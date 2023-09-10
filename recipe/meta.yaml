@@ -7,9 +7,18 @@ package:
 source:
   url: https://github.com/xiph/rav1e/archive/refs/tags/v{{ version }}.tar.gz
   sha256: 723696e93acbe03666213fbc559044f3cae5b8b888b2ddae667402403cff51e5
+  patches:
+    # I'm not sure why it is failing on building git_version on ppc64le only
+    # It seems that an mtune flag is being passed through
+    # but in reality, we aren't using the git source, so this "feature"
+    # is mostly returning the git describe --always 
+    # of this feedstock which likely isn't what the library authors intended
+    # removing this dependency has the side effect of allowing the builds to pass
+    # on ppc64le
+    - no_git_version.patch
 
 build:
-  number: 1
+  number: 2
   run_exports:
     # It seems that they export a so with .0, so I'm going to wish for the best
     - {{ pin_subpackage('rav1e', max_pin='x') }}
@@ -21,13 +30,9 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('rust') }}
     - cargo-bundle-licenses
-    - cargo-c                            # [not ppc64le]
+    - cargo-c
     - nasm
     - pkg-config                         # [unix]
-  host:
-    # hmaarrfk -- this seems required to build cargo-c
-    # which we do not have yet for ppc64le
-    - openssl  # [ppc64le]
 
 test:
   requires:
@@ -37,7 +42,7 @@ test:
   files:
     - CMakeLists.txt
   commands:
-    - rav1e --version  # [build_platform == target_platform]
+    - rav1e --version
     - test -f ${PREFIX}/lib/librav1e${SHLIB_EXT}                # [unix]
     - if not exist %LIBRARY_PREFIX%\\bin\\rav1e.dll exit 1      # [win]
     - if not exist %LIBRARY_PREFIX%\\lib\\rav1e.dll.lib exit 1  # [win]
