@@ -11,22 +11,24 @@ source:
     # I'm not sure why it is failing on building git_version on ppc64le only
     # It seems that an mtune flag is being passed through
     # but in reality, we aren't using the git source, so this "feature"
-    # is mostly returning the git describe --always 
+    # is mostly returning the git describe --always
     # of this feedstock which likely isn't what the library authors intended
     # removing this dependency has the side effect of allowing the builds to pass
     # on ppc64le
     - no_git_version.patch
 
 build:
-  number: 2
+  number: 3
   run_exports:
     # It seems that they export a so with .0, so I'm going to wish for the best
-    - {{ pin_subpackage('rav1e', max_pin='x') }}
+    # But there is no gurantee so lets tighten this up a little bit
+    - {{ pin_subpackage('rav1e', max_pin='x.x') }}
   has_prefix_files:
     - Library/lib/pkgconfig/rav1e.pc  # [win]
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('rust') }}
     - cargo-bundle-licenses
@@ -42,7 +44,10 @@ test:
   files:
     - CMakeLists.txt
   commands:
-    - rav1e --version
+    # Do not include statically linked 60MB binary....
+    # - rav1e --version
+    - test ! -f ${PREFIX}/bin/rav1e                             # [unix]
+    - if exist %LIBRARY_PREFIX%\\bin\\rav1e.exe exit 1          # [win]
     - test -f ${PREFIX}/lib/librav1e${SHLIB_EXT}                # [unix]
     - if not exist %LIBRARY_PREFIX%\\bin\\rav1e.dll exit 1      # [win]
     - if not exist %LIBRARY_PREFIX%\\lib\\rav1e.dll.lib exit 1  # [win]
