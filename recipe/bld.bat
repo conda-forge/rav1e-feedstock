@@ -9,3 +9,9 @@ if errorlevel 1 exit 1
 
 cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
 if errorlevel 1 exit 1
+
+:REM Remove binary since it takes alot of space and not really used downstream
+:REM Can add later if people request as
+:REM rav1e-bin
+del /F /Q %LIBRARY_PREFIX%\bin\rav1e
+if errorlevel 1 exit 1
