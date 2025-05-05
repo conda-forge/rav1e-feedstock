@@ -18,3 +18,7 @@ cargo install \
     --target ${CARGO_TARGET}
 
 cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
+# Remove binary since it takes alot of space and not really used downstream
+# Can add later if people request as
+# rav1e-bin
+rm ${PREFIX}/bin/rav1e
