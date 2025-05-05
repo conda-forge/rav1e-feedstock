@@ -1,4 +1,4 @@
-{% set version = "0.6.6" %}
+{% set version = "0.7.1" %}
 
 package:
   name: rav1e
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/xiph/rav1e/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 723696e93acbe03666213fbc559044f3cae5b8b888b2ddae667402403cff51e5
+  sha256: da7ae0df2b608e539de5d443c096e109442cdfa6c5e9b4014361211cf61d030c
   patches:
     # I'm not sure why it is failing on building git_version on ppc64le only
     # It seems that an mtune flag is being passed through
