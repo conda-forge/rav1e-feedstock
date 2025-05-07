@@ -15,3 +15,6 @@ if errorlevel 1 exit 1
 :REM rav1e-bin
 del /F /Q %LIBRARY_PREFIX%\bin\rav1e.exe
 if errorlevel 1 exit 1
+
+del /F /Q %LIBRARY_PREFIX%\.crates.toml
+del /F /Q %LIBRARY_PREFIX%\.crates2.json

@@ -22,3 +22,6 @@ cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
 # Can add later if people request as
 # rav1e-bin
 rm ${PREFIX}/bin/rav1e
+
+rm ${PREFIX}/.crates.toml
+rm ${PREFIX}/.crates2.json
