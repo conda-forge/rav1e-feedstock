@@ -50,7 +50,7 @@ test:
     - if exist %LIBRARY_PREFIX%\\bin\\rav1e.exe exit 1          # [win]
     - test -f ${PREFIX}/lib/librav1e${SHLIB_EXT}                # [unix]
     - test -f ${PREFIX}/lib/librav1e.so.0.7                     # [linux]
-    - test -f ${PREFIX}/lib/librav1e.0.7.dynlib                 # [osx]
+    - test -f ${PREFIX}/lib/librav1e.0.7.dylib                  # [osx]
     - if not exist %LIBRARY_PREFIX%\\bin\\rav1e.dll exit 1      # [win]
     - if not exist %LIBRARY_PREFIX%\\lib\\rav1e.dll.lib exit 1  # [win]
     - cmake . -GNinja
