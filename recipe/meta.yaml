@@ -1,4 +1,4 @@
-{% set version = "0.7.1" %}
+{% set version = "0.8.1" %}
 
 package:
   name: rav1e
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/xiph/rav1e/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: da7ae0df2b608e539de5d443c096e109442cdfa6c5e9b4014361211cf61d030c
+  sha256: 06d1523955fb6ed9cf9992eace772121067cca7e8926988a1ee16492febbe01e
   patches:
     # I'm not sure why it is failing on building git_version on ppc64le only
     # It seems that an mtune flag is being passed through
@@ -18,7 +18,7 @@ source:
     - no_git_version.patch
 
 build:
-  number: 3
+  number: 0
   run_exports:
     # It seems that they export a so with .0, so I'm going to wish for the best
     # But there is no gurantee so lets tighten this up a little bit
@@ -49,8 +49,8 @@ test:
     - test ! -f ${PREFIX}/bin/rav1e                             # [unix]
     - if exist %LIBRARY_PREFIX%\\bin\\rav1e.exe exit 1          # [win]
     - test -f ${PREFIX}/lib/librav1e${SHLIB_EXT}                # [unix]
-    - test -f ${PREFIX}/lib/librav1e.so.0.7                     # [linux]
-    - test -f ${PREFIX}/lib/librav1e.0.7.dylib                  # [osx]
+    - test -f ${PREFIX}/lib/librav1e.so.0.8                     # [linux]
+    - test -f ${PREFIX}/lib/librav1e.0.8.dylib                  # [osx]
     - if not exist %LIBRARY_PREFIX%\\bin\\rav1e.dll exit 1      # [win]
     - if not exist %LIBRARY_PREFIX%\\lib\\rav1e.dll.lib exit 1  # [win]
     - cmake . -GNinja
