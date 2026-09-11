@@ -18,7 +18,7 @@ source:
     - no_git_version.patch
 
 build:
-  number: 0
+  number: 1
   run_exports:
     # It seems that they export a so with .0, so I'm going to wish for the best
     # But there is no gurantee so lets tighten this up a little bit
@@ -33,6 +33,7 @@ requirements:
     - {{ compiler('rust') }}
     - cargo-bundle-licenses
     - cargo-c
+    - clang  # [target_platform == "win-arm64"]
     - nasm
     - pkg-config                         # [unix]
 
@@ -41,8 +42,11 @@ test:
     - cmake
     - ninja
     - pkg-config
+    - {{ compiler('c') }}  # [target_platform == "win-arm64"]
   files:
     - CMakeLists.txt
+    - encode-test.c  # [target_platform == "win-arm64"]
+    - encode-test.bat  # [target_platform == "win-arm64"]
   commands:
     # Do not include statically linked 60MB binary....
     # - rav1e --version
@@ -54,6 +58,7 @@ test:
     - if not exist %LIBRARY_PREFIX%\\bin\\rav1e.dll exit 1      # [win]
     - if not exist %LIBRARY_PREFIX%\\lib\\rav1e.dll.lib exit 1  # [win]
     - cmake . -GNinja
+    - call encode-test.bat  # [target_platform == "win-arm64"]
 
 about:
   home: https://github.com/xiph/rav1e

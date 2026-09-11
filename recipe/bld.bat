@@ -1,5 +1,11 @@
 echo ON
 
+if "%target_platform%"=="win-arm64" (
+  rem rav1e's AArch64 assembly uses GNU assembler syntax, supported by Clang.
+  set "CC=clang-cl"
+  set "CFLAGS=%CFLAGS% -DPIC"
+)
+
 cargo cinstall --library-type cdylib --release --prefix %LIBRARY_PREFIX%
 if errorlevel 1 exit 1
 
