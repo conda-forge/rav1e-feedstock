@@ -18,7 +18,7 @@ source:
     - no_git_version.patch
 
 build:
-  number: 0
+  number: 1
   run_exports:
     # It seems that they export a so with .0, so I'm going to wish for the best
     # But there is no gurantee so lets tighten this up a little bit
@@ -33,6 +33,7 @@ requirements:
     - {{ compiler('rust') }}
     - cargo-bundle-licenses
     - cargo-c
+    - clang  # [target_platform == "win-arm64"]
     - nasm
     - pkg-config                         # [unix]
 
