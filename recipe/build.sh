@@ -4,6 +4,7 @@ CARGO_TARGET="${HOST}"
 CARGO_TARGET="$(echo -n ${CARGO_TARGET} | sed "s/conda/unknown/")"
 CARGO_TARGET="$(echo -n ${CARGO_TARGET} | sed "s/darwin.*/darwin/")"
 CARGO_TARGET="$(echo -n ${CARGO_TARGET} | sed "s/arm64/aarch64/")"
+CARGO_TARGET="$(echo -n ${CARGO_TARGET} | sed "s/^riscv64-/riscv64gc-/")"
 
 cargo cinstall \
     --library-type cdylib \
